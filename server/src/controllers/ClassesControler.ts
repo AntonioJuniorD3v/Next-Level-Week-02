@@ -24,6 +24,7 @@ export default class ClassesController {
     }
 
     const timeInMinutes = convertHourToMinutes(time);
+    console.log(timeInMinutes);
 
     const classes = await db("classes")
       .whereExists(function () {
@@ -37,6 +38,7 @@ export default class ClassesController {
       .where("classes.subject", "=", subject)
       .join("users", "classes.user_id", "=", "users.id")
       .select(["classes.*", "users.*"]);
+
 
     return response.json(classes);
   }
